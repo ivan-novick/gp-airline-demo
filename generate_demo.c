@@ -6,6 +6,9 @@
 #include <stdlib.h>
 #include <libpq-fe.h>
 
+// Forward declaration
+void create_airline_demo_tables(PGconn *conn);
+
 // Function to create tables for the airline-demo database
 void create_airline_demo_tables(PGconn *conn) {
     const char *create_airports_sql =
@@ -92,7 +95,11 @@ int main() {
     }
 
     printf("Database 'airline-demo' created successfully.\n");
-
+    
+    // Connect to the newly created database
+    const char *conninfo_airline = "host=localhost port=5432 dbname=airline-demo user=gpadmin";
+    PGconn *conn_airline = PQconnectdb(conninfo_airline);
+    
     // Invoke table creation function (you must implement this)
     create_airline_demo_tables(conn_airline);
      

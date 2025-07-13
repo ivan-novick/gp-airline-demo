@@ -9,7 +9,7 @@ void create_airline_demo_tables(PGconn *conn);
 void create_airline_demo_tables(PGconn *conn) {
     const char *create_airports_sql =
         "CREATE TABLE IF NOT EXISTS airports ("
-        "airport_id SERIAL PRIMARY KEY,"
+        "airport_id SERIAL,"
         "name TEXT NOT NULL,"
         "city TEXT NOT NULL,"
         "country TEXT NOT NULL,"
@@ -18,7 +18,7 @@ void create_airline_demo_tables(PGconn *conn) {
 
     const char *create_flights_sql =
         "CREATE TABLE IF NOT EXISTS flights ("
-        "flight_id SERIAL PRIMARY KEY,"
+        "flight_id SERIAL,"
         "flight_number TEXT NOT NULL,"
         "departure_airport_id INT REFERENCES airports(airport_id),"
         "arrival_airport_id INT REFERENCES airports(airport_id),"
@@ -29,7 +29,7 @@ void create_airline_demo_tables(PGconn *conn) {
 
     const char *create_passengers_sql =
         "CREATE TABLE IF NOT EXISTS passengers ("
-        "passenger_id SERIAL PRIMARY KEY,"
+        "passenger_id SERIAL,"
         "first_name TEXT NOT NULL,"
         "last_name TEXT NOT NULL,"
         "email TEXT UNIQUE,"
@@ -38,7 +38,7 @@ void create_airline_demo_tables(PGconn *conn) {
 
     const char *create_tickets_sql =
         "CREATE TABLE IF NOT EXISTS tickets ("
-        "ticket_id SERIAL PRIMARY KEY,"
+        "ticket_id SERIAL,"
         "flight_id INT REFERENCES flights(flight_id),"
         "passenger_id INT REFERENCES passengers(passenger_id),"
         "seat_number TEXT NOT NULL,"

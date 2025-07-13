@@ -39,7 +39,7 @@ void create_airline_demo_tables(PGconn *conn) {
     const char *create_tickets_sql =
         "CREATE TABLE IF NOT EXISTS tickets ("
         "ticket_id SERIAL,"
-        "flight_id INT REFERENCES flights(flight_id),"
+        "flight_id INT,"
         "passenger_id INT,"
         "seat_number TEXT NOT NULL,"
         "price NUMERIC(10,2) NOT NULL,"

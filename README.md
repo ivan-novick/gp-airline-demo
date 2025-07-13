@@ -1,2 +1,2 @@
 # gp-airline-demo
-this create a data set that can be used for queries modelling an airline business
+This create a data set that can be used for queries modelling an airline business

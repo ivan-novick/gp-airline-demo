@@ -13,7 +13,7 @@ void create_airline_demo_tables(PGconn *conn) {
         "name TEXT NOT NULL,"
         "city TEXT NOT NULL,"
         "country TEXT NOT NULL,"
-        "iata_code CHAR(3) UNIQUE NOT NULL"
+        "iata_code CHAR(3) NOT NULL"
         ") DISTRIBUTED RANDOMLY;";
 
     const char *create_flights_sql =
@@ -32,7 +32,7 @@ void create_airline_demo_tables(PGconn *conn) {
         "passenger_id SERIAL,"
         "first_name TEXT NOT NULL,"
         "last_name TEXT NOT NULL,"
-        "email TEXT UNIQUE,"
+        "email TEXT,"
         "phone TEXT"
         ") DISTRIBUTED RANDOMLY;";
 

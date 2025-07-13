@@ -1,15 +1,11 @@
 // a program that connects to greenplum database and create a database named airline-demo
 // gcc -o create_airline_demo generate_demo.c -lpq
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <libpq-fe.h>
 
-// Forward declaration
 void create_airline_demo_tables(PGconn *conn);
 
-// Function to create tables for the airline-demo database
 void create_airline_demo_tables(PGconn *conn) {
     const char *create_airports_sql =
         "CREATE TABLE IF NOT EXISTS airports ("
@@ -95,15 +91,22 @@ int main() {
     }
 
     printf("Database 'airline-demo' created successfully.\n");
-    
+    PQclear(res);
+    PQfinish(conn);
+
     // Connect to the newly created database
     const char *conninfo_airline = "host=localhost port=5432 dbname=airline-demo user=gpadmin";
     PGconn *conn_airline = PQconnectdb(conninfo_airline);
-    
-    // Invoke table creation function (you must implement this)
+
+    if (PQstatus(conn_airline) != CONNECTION_OK) {
+        fprintf(stderr, "Connection to airline-demo failed: %s", PQerrorMessage(conn_airline));
+        PQfinish(conn_airline);
+        return 1;
+    }
+
+    // Create demo tables
     create_airline_demo_tables(conn_airline);
-     
-    PQclear(res);
-    PQfinish(conn);
+
+    PQfinish(conn_airline);
     return 0;
 }
